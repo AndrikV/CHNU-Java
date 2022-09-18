@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="lab0Tests.Var1Tests" tests="62" skipped="0" failures="0" errors="0" timestamp="2022-09-18T21:45:30" hostname="ANDRIKVAKAR" time="0.052">
+  <properties/>
+  <testcase name="arrayTaskBadNTest[0](-100)" classname="lab0Tests.Var1Tests" time="0.002"/>
+  <testcase name="arrayTaskBadNTest[1](-1)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="arrayTaskBadNTest[2](0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="arrayTaskValidNTest[0](3, [I@12a94400)" classname="lab0Tests.Var1Tests" time="0.002"/>
+  <testcase name="forTaskBadNTest[0](-100)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="forTaskBadNTest[1](-1)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="forTaskBadNTest[2](0)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="forTaskValidNTest[0](-10, 5, [I@2a225dd7)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="forTaskValidNTest[1](0, 2, [I@125290e5)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="forTaskValidNTest[2](1, 1, [I@57576994)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="ifTaskTest[0](-10, -10)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="ifTaskTest[1](-1, -1)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="ifTaskTest[2](0, 0)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="ifTaskTest[3](1, 2)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="ifTaskTest[4](10, 11)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="inputTest[0](1)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="inputTest[1](10)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="inputTest[2](37)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="inputTest[3](134)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="inputTest[4](5070)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="negativeInputTest[0](-537)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="negativeInputTest[1](-1)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="negativeInputTest[2](0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="notPositiveNumberTest[0](0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="notPositiveNumberTest[1](-1)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="notPositiveNumberTest[2](-10)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="positiveNumberTest" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="switchTaskBadWeekdayNumberTest[0](-100)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="switchTaskBadWeekdayNumberTest[1](-1)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="switchTaskBadWeekdayNumberTest[2](0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="switchTaskBadWeekdayNumberTest[3](8)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="switchTaskBadWeekdayNumberTest[4](9)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="switchTaskBadWeekdayNumberTest[5](100)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="twoDimensionArrayTaskInvalidArgumentsTest[0](-10, -10)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="twoDimensionArrayTaskInvalidArgumentsTest[1](-10, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="twoDimensionArrayTaskInvalidArgumentsTest[2](0, -10)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="twoDimensionArrayTaskInvalidArgumentsTest[3](0, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="twoDimensionArrayTaskInvalidArgumentsTest[4](-10, 10)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="twoDimensionArrayTaskInvalidArgumentsTest[5](0, -10)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="twoDimensionArrayTaskInvalidArgumentsTest[6](10, -10)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="twoDimensionArrayTaskInvalidArgumentsTest[7](10, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="twoDimensionArrayTaskValidArgumentsTest" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="validWeekdayNumberTest[0](1, Monday)" classname="lab0Tests.Var1Tests" time="0.003"/>
+  <testcase name="validWeekdayNumberTest[1](3, Wednesday)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="validWeekdayNumberTest[2](7, Sunday)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskBadArgumentsTest[0](-10, -10)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="whileTaskBadArgumentsTest[1](-10, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskBadArgumentsTest[2](0, -10)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="whileTaskBadArgumentsTest[3](0, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskBadArgumentsTest[4](-10, 10)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="whileTaskBadArgumentsTest[5](0, -10)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskBadArgumentsTest[6](10, -10)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="whileTaskBadArgumentsTest[7](10, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskBadArgumentsTest[8](0, 10)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskBadArgumentsTest[9](1, 10)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="whileTaskBadArgumentsTest[10](10, 10)" classname="lab0Tests.Var1Tests" time="0.001"/>
+  <testcase name="whileTaskValidArgumentsTest[0](20, 10, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskValidArgumentsTest[1](25, 10, 5)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskValidArgumentsTest[2](2, 1, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskValidArgumentsTest[3](15, 1, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskValidArgumentsTest[4](15, 2, 1)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <testcase name="whileTaskValidArgumentsTest[5](16, 2, 0)" classname="lab0Tests.Var1Tests" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
