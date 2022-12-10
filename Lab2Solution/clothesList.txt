@@ -1,0 +1,49 @@
+Id: 1
+Name: Rainbow
+Type: T-shirt
+For whom: MALE
+Manufacturer:
+    Name: Louis Vuitton
+    Contact info: Telegram: @example
+Manufacture date: 2022-12-10
+Price: 300
+==========
+Id: 1
+Name: Rainbow
+Type: T-shirt
+For whom: MALE
+Manufacturer:
+    Name: Louis Vuitton
+    Contact info: Telegram: @example
+Manufacture date: 2022-12-10
+Price: 300
+==========
+Id: 1
+Name: Rainbow
+Type: T-shirt
+For whom: MALE
+Manufacturer:
+    Name: Louis Vuitton
+    Contact info: Telegram: @example
+Manufacture date: 2022-12-10
+Price: 300
+==========
+Id: 1
+Name: Rainbow
+Type: T-shirt
+For whom: MALE
+Manufacturer:
+    Name: Louis Vuitton
+    Contact info: Telegram: @example
+Manufacture date: 2022-12-10
+Price: 300
+==========
+Id: 1
+Name: Rainbow
+Type: T-shirt
+For whom: MALE
+Manufacturer:
+    Name: Louis Vuitton
+    Contact info: Telegram: @example
+Manufacture date: 2022-12-10
+Price: 300
