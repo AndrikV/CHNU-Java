@@ -1,0 +1,7 @@
+rootProject.name = 'Lab3Solution'
+include 'src:main:Lab2'
+findProject(':src:main:Lab2')?.name = 'Lab2'
+include 'src:lab2'
+findProject(':src:lab2')?.name = 'lab2'
+include 'lab2'
+

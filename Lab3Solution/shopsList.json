@@ -1,0 +1,322 @@
+[
+  {
+    "name": "Some name",
+    "goods": [
+      {
+        "id": 1,
+        "name": "clothingName1",
+        "type": "type1",
+        "forWhom": "MALE",
+        "manufacturer": {
+          "name": "manufacturer1",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-10",
+        "price": 300
+      },
+      {
+        "id": 2,
+        "name": "clothingName2",
+        "type": "type1",
+        "forWhom": "MALE",
+        "manufacturer": {
+          "name": "manufacturer1",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-11",
+        "price": 150
+      },
+      {
+        "id": 3,
+        "name": "clothingName3",
+        "type": "type2",
+        "forWhom": "MALE",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-10",
+        "price": 250
+      },
+      {
+        "id": 4,
+        "name": "clothingName4",
+        "type": "type3",
+        "forWhom": "FEMALE",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-15",
+        "price": 500
+      },
+      {
+        "id": 5,
+        "name": "clothingName5",
+        "type": "type3",
+        "forWhom": "BOY",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-15",
+        "price": 200
+      },
+      {
+        "id": 6,
+        "name": "clothingName6",
+        "type": "type5",
+        "forWhom": "GIRL",
+        "manufacturer": {
+          "name": "manufacturer4",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-16",
+        "price": 350
+      }
+    ]
+  },
+  {
+    "name": "Some name",
+    "goods": [
+      {
+        "id": 2,
+        "name": "clothingName2",
+        "type": "type1",
+        "forWhom": "MALE",
+        "manufacturer": {
+          "name": "manufacturer1",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-11",
+        "price": 150
+      },
+      {
+        "id": 3,
+        "name": "clothingName3",
+        "type": "type2",
+        "forWhom": "MALE",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-10",
+        "price": 250
+      },
+      {
+        "id": 7,
+        "name": "clothingName7",
+        "type": "type4",
+        "forWhom": "BOY",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-08",
+        "price": 150
+      },
+      {
+        "id": 8,
+        "name": "clothingName8",
+        "type": "type6",
+        "forWhom": "GIRL",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-08",
+        "price": 250
+      }
+    ]
+  },
+  {
+    "name": "Some name",
+    "goods": [
+      {
+        "id": 6,
+        "name": "clothingName6",
+        "type": "type5",
+        "forWhom": "GIRL",
+        "manufacturer": {
+          "name": "manufacturer4",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-16",
+        "price": 350
+      },
+      {
+        "id": 7,
+        "name": "clothingName7",
+        "type": "type4",
+        "forWhom": "BOY",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-08",
+        "price": 150
+      },
+      {
+        "id": 8,
+        "name": "clothingName8",
+        "type": "type6",
+        "forWhom": "GIRL",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-08",
+        "price": 250
+      },
+      {
+        "id": 9,
+        "name": "clothingName9",
+        "type": "type7",
+        "forWhom": "FEMALE",
+        "manufacturer": {
+          "name": "manufacturer3",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-12",
+        "price": 300
+      },
+      {
+        "id": 10,
+        "name": "clothingName10",
+        "type": "type8",
+        "forWhom": "FEMALE",
+        "manufacturer": {
+          "name": "manufacturer3",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-12",
+        "price": 500
+      }
+    ]
+  },
+  {
+    "name": "Some name",
+    "goods": [
+      {
+        "id": 1,
+        "name": "clothingName1",
+        "type": "type1",
+        "forWhom": "MALE",
+        "manufacturer": {
+          "name": "manufacturer1",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-10",
+        "price": 300
+      },
+      {
+        "id": 2,
+        "name": "clothingName2",
+        "type": "type1",
+        "forWhom": "MALE",
+        "manufacturer": {
+          "name": "manufacturer1",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-11",
+        "price": 150
+      },
+      {
+        "id": 3,
+        "name": "clothingName3",
+        "type": "type2",
+        "forWhom": "MALE",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-10",
+        "price": 250
+      },
+      {
+        "id": 4,
+        "name": "clothingName4",
+        "type": "type3",
+        "forWhom": "FEMALE",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-15",
+        "price": 500
+      },
+      {
+        "id": 5,
+        "name": "clothingName5",
+        "type": "type3",
+        "forWhom": "BOY",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-15",
+        "price": 200
+      },
+      {
+        "id": 6,
+        "name": "clothingName6",
+        "type": "type5",
+        "forWhom": "GIRL",
+        "manufacturer": {
+          "name": "manufacturer4",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-16",
+        "price": 350
+      },
+      {
+        "id": 7,
+        "name": "clothingName7",
+        "type": "type4",
+        "forWhom": "BOY",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-08",
+        "price": 150
+      },
+      {
+        "id": 8,
+        "name": "clothingName8",
+        "type": "type6",
+        "forWhom": "GIRL",
+        "manufacturer": {
+          "name": "manufacturer2",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-08",
+        "price": 250
+      },
+      {
+        "id": 9,
+        "name": "clothingName9",
+        "type": "type7",
+        "forWhom": "FEMALE",
+        "manufacturer": {
+          "name": "manufacturer3",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-12",
+        "price": 300
+      },
+      {
+        "id": 10,
+        "name": "clothingName10",
+        "type": "type8",
+        "forWhom": "FEMALE",
+        "manufacturer": {
+          "name": "manufacturer3",
+          "contactInfo": "Some contact info"
+        },
+        "manufactureDate": "2022-12-12",
+        "price": 500
+      }
+    ]
+  }
+]
