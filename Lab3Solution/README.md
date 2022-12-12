@@ -19,5 +19,7 @@
     Назва методу: `clothesNumberByManufacturers`. Використано `Comparator`;
 3. Для кожного магазину із заданого набіру об'єктів `Shops` визначити кількість одягу, наявного в магазині.
     Назва методу: `clothesNumberByShops`. Використано `Comparable`;
+
 Всі ці методи реалізовано в класі `ServiceMethods`.
+
 Аналогічні методи з використанням Stream API реалізовано в клаcі `ServiceMethodsUsingStreamAPI`.
