@@ -6,15 +6,14 @@ import lab1ClothesShop.Shop;
 
 import java.util.*;
 
-
 public class ServiceMethods {
     /**
-     * Calculate number of clothes by FOR_WHOM categories
+     * Calculate count of clothes by FOR_WHOM categories
      *
      * @param clothes: list of clothes
-     * @return hash map, where key is all 4 FOR_WHOM and values are number of clothes
+     * @return hash map, where key is all 4 FOR_WHOM and values are count of clothes
      */
-    static public HashMap<Clothing.FOR_WHOM, Integer> clothesNumberByForWhom(List<Clothing> clothes) {
+    public HashMap<Clothing.FOR_WHOM, Integer> clothesCountByForWhom(List<Clothing> clothes) {
         HashMap<Clothing.FOR_WHOM, Integer> result = new HashMap<>();
         for (Clothing.FOR_WHOM forWhom : Clothing.FOR_WHOM.values()) {
             result.put(forWhom, 0);
@@ -29,12 +28,12 @@ public class ServiceMethods {
     }
 
 
-    static private class ManufacturerClothesNumberComparator implements Comparator<Map.Entry<Manufacturer, Integer>> {
+    static private class ManufacturerClothesCountComparator implements Comparator<Map.Entry<Manufacturer, Integer>> {
         @Override
         public int compare(Map.Entry<Manufacturer, Integer> ob1, Map.Entry<Manufacturer, Integer> ob2) {
-            int comparingByNumbers = Integer.compare(ob2.getValue(), ob1.getValue());
-            if (comparingByNumbers != 0) {
-                return comparingByNumbers;
+            int comparingByCounts = Integer.compare(ob2.getValue(), ob1.getValue());
+            if (comparingByCounts != 0) {
+                return comparingByCounts;
             }
             else {
                 return ob1.getKey().getName().compareTo(ob2.getKey().getName());
@@ -43,13 +42,13 @@ public class ServiceMethods {
     }
 
     /**
-     * Calculate number of clothes for each manufacturer
+     * Calculate count of clothes for each manufacturer
      *
      * @param clothes: list of clothes
-     * @param manufacturers: list of manufacturers, for which need to be calculated number of clothes
-     * @return List<Map.Entry<Manufacturer, Integer>>, where Integer is a number of clothes
+     * @param manufacturers: list of manufacturers, for which need to be calculated count of clothes
+     * @return List<Map.Entry<Manufacturer, Integer>>, where Integer is a count of clothes
      */
-    static public List<Map.Entry<Manufacturer, Integer>> clothesNumberByManufacturers(
+    public List<Map.Entry<Manufacturer, Integer>> clothesCountByManufacturers(
             List<Clothing> clothes, List<Manufacturer> manufacturers) {
         HashMap<Manufacturer, Integer> hashMap = new HashMap<>();
         for (Manufacturer manufacturer : manufacturers) {
@@ -65,48 +64,48 @@ public class ServiceMethods {
         }
 
         List<AbstractMap.Entry<Manufacturer, Integer>> resultList = new ArrayList<>(hashMap.entrySet());
-        resultList.sort(new ManufacturerClothesNumberComparator());
+        resultList.sort(new ManufacturerClothesCountComparator());
         return resultList;
     }
 
-    static public class ComparableByClothesNumberShop implements Comparable<ComparableByClothesNumberShop> {
+    static public class ComparableByClothesCountShop implements Comparable<ComparableByClothesCountShop> {
         Shop shop;
 
         Shop getShop() {
             return shop;
         }
 
-        Integer getClothesNumber() {
+        Integer getClothesCount() {
             return shop.getGoods().size();
         }
 
-        public ComparableByClothesNumberShop(Shop shop)
+        public ComparableByClothesCountShop(Shop shop)
         {
             this.shop = shop;
         }
 
         @Override
-        public int compareTo(ComparableByClothesNumberShop shop) {
-            return Integer.compare(getClothesNumber(), shop.getClothesNumber());
+        public int compareTo(ComparableByClothesCountShop shop) {
+            return Integer.compare(getClothesCount(), shop.getClothesCount());
         }
     }
 
     /**
-     * For each shop calculate number of clothes
+     * For each shop calculate count of clothes
      *
-     * @param shops, for which need to be calculated number of clothes
-     * @return List<AbstractMap.SimpleEntry<String, Integer>>, where String is shop name and Integer is a number of clothes
+     * @param shops, for which need to be calculated count of clothes
+     * @return List<AbstractMap.SimpleEntry<String, Integer>>, where String is shop name and Integer is a count of clothes
      */
-    static public List<AbstractMap.SimpleEntry<String, Integer>> clothesNumberByShops(List<Shop> shops) {
-        List<ComparableByClothesNumberShop> sortedShops = new ArrayList<>();
+    public List<AbstractMap.SimpleEntry<String, Integer>> clothesCountByShops(List<Shop> shops) {
+        List<ComparableByClothesCountShop> sortedShops = new ArrayList<>();
         for (Shop shop : shops) {
-            sortedShops.add(new ComparableByClothesNumberShop(shop));
+            sortedShops.add(new ComparableByClothesCountShop(shop));
         }
         sortedShops.sort((a, b) -> b.compareTo(a));
-        List<AbstractMap.SimpleEntry<String, Integer>> shopsClothesNumber = new ArrayList<>();
-        for (ComparableByClothesNumberShop ob : sortedShops) {
-            shopsClothesNumber.add(new AbstractMap.SimpleEntry<>(ob.getShop().getName(), ob.getClothesNumber()));
+        List<AbstractMap.SimpleEntry<String, Integer>> shopsClothesCount = new ArrayList<>();
+        for (ComparableByClothesCountShop ob : sortedShops) {
+            shopsClothesCount.add(new AbstractMap.SimpleEntry<>(ob.getShop().getName(), ob.getClothesCount()));
         }
-        return shopsClothesNumber;
+        return shopsClothesCount;
     }
 }
