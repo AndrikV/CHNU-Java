@@ -27,8 +27,6 @@ public class ClothingWithValidation {
         MALE, FEMALE, BOY, GIRL
     }
 
-    static private int objectsCount = 0;
-
     @NotNull(message = "Id can not be null")
     @Positive
     private int id;
