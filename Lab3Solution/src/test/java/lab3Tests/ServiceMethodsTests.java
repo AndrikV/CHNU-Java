@@ -13,8 +13,8 @@ import org.testng.asserts.SoftAssert;
 import java.util.*;
 
 public class ServiceMethodsTests {
-    private ServiceMethodsUsingStreamAPI serviceMethodsUsingStreamAPI = new ServiceMethodsUsingStreamAPI();
-    private ServiceMethods serviceMethods = new ServiceMethods();
+    private final ServiceMethodsUsingStreamAPI serviceMethodsUsingStreamAPI = new ServiceMethodsUsingStreamAPI();
+    private final ServiceMethods serviceMethods = new ServiceMethods();
 
     @Test
     public void clothesCountByForWhomTest() {
@@ -22,7 +22,7 @@ public class ServiceMethodsTests {
         List<Clothing> testList = jsonDeserializer.listFromFile(new TypeReference<>() {}, "clothesList.json");
 
         HashMap<Clothing.FOR_WHOM, Integer> resultForTesting = serviceMethods.clothesCountByForWhom(testList);
-        HashMap<Clothing.FOR_WHOM, Integer> resultForTestingStreamAPI = serviceMethodsUsingStreamAPI.clothesCountByForWhom(testList);
+        HashMap<Clothing.FOR_WHOM, Long> resultForTestingStreamAPI = serviceMethodsUsingStreamAPI.clothesCountByForWhom(testList);
         HashMap<Clothing.FOR_WHOM, Integer> expectedResult = new HashMap<>();
         expectedResult.put(Clothing.FOR_WHOM.MALE, 3);
         expectedResult.put(Clothing.FOR_WHOM.FEMALE, 3);

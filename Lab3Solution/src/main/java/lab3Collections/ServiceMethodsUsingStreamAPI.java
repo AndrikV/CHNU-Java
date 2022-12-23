@@ -15,14 +15,14 @@ public class ServiceMethodsUsingStreamAPI {
      * @param clothes: list of clothes
      * @return hash map, where key is all 4 FOR_WHOM and values are count of clothes
      */
-    public HashMap<Clothing.FOR_WHOM, Integer> clothesCountByForWhom(List<Clothing> clothes) {
+    public HashMap<Clothing.FOR_WHOM, Long> clothesCountByForWhom(List<Clothing> clothes) {
         // Change: used collect(Collectors.groupingBy(...))
         return new HashMap<> (
             clothes.stream()
                 .collect(
                     Collectors.groupingBy(
                         Clothing::getForWhom,
-                        Collectors.reducing(0, e -> 1, Integer::sum)
+                        Collectors.counting()
                     )
                 )
         );
@@ -67,25 +67,17 @@ public class ServiceMethodsUsingStreamAPI {
         return resultList;
     }
 
-    public static class ComparableByClothesCountShop implements Comparable<ComparableByClothesCountShop> {
-        Shop shop;
-
-        Shop getShop() {
-            return shop;
-        }
-
-        Integer getClothesCount() {
-            return shop.getGoods().size();
-        }
-
-        public ComparableByClothesCountShop(Shop shop)
-        {
-            this.shop = shop;
-        }
-
+    // TODO: remove
+    public static class ShopClothesCountComparator implements Comparator<AbstractMap.SimpleEntry<String, Integer>> {
         @Override
-        public int compareTo(ComparableByClothesCountShop shop) {
-            return Integer.compare(getClothesCount(), shop.getClothesCount());
+        public int compare(AbstractMap.SimpleEntry<String, Integer> ob1, AbstractMap.SimpleEntry<String, Integer> ob2) {
+            int comparingByCounts = Integer.compare(ob2.getValue(), ob1.getValue());
+            if (comparingByCounts != 0) {
+                return comparingByCounts;
+            }
+            else {
+                return ob1.getKey().compareTo(ob2.getKey());
+            }
         }
     }
 
@@ -96,15 +88,10 @@ public class ServiceMethodsUsingStreamAPI {
      * @return List<AbstractMap.SimpleEntry<String, Integer>>, where String is shop name and Integer is a count of clothes
      */
     public List<AbstractMap.SimpleEntry<String, Integer>> clothesCountByShops(List<Shop> shops) {
-        List<ComparableByClothesCountShop> sortedShops = new ArrayList<>();
+        List<AbstractMap.SimpleEntry<String, Integer>> result = new ArrayList<>();
         for (Shop shop : shops) {
-            sortedShops.add(new ComparableByClothesCountShop(shop));
+            result.add(new AbstractMap.SimpleEntry<>(shop.getName(), shop.getGoods().size()));
         }
-        sortedShops = sortedShops.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
-        List<AbstractMap.SimpleEntry<String, Integer>> shopsClothesCount = new ArrayList<>();
-        for (ComparableByClothesCountShop ob : sortedShops) {
-            shopsClothesCount.add(new AbstractMap.SimpleEntry<>(ob.getShop().getName(), ob.getClothesCount()));
-        }
-        return shopsClothesCount;
+        return result.stream().sorted(new ShopClothesCountComparator()).collect(Collectors.toList());
     }
 }

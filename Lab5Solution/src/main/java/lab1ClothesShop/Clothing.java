@@ -1,42 +1,25 @@
 package lab1ClothesShop;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.Objects;
-
-// TODO: Comparable
 
 /**
  * Class that described different clothes of shop
  */
-public class Clothing implements Comparable<Clothing> {
-    @Override
-    public int compareTo(Clothing o) {
-        return name.compareTo(o.getName());
-    }
-
+public class Clothing {
     public enum FOR_WHOM {
         MALE, FEMALE, BOY, GIRL
     }
 
     static private int objectsCount = 0;
 
-    private int id;
-    private String name;
-    private String type;
-    private FOR_WHOM forWhom;
-    private Manufacturer manufacturer;
-    private LocalDate manufactureDate;
-    private int price;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    protected String name;
+    protected String type;
+    protected FOR_WHOM forWhom;
+    protected Manufacturer manufacturer;
+    protected Timestamp manufactureDate;
+    protected int price;
 
     public String getName() {
         return name;
@@ -70,11 +53,11 @@ public class Clothing implements Comparable<Clothing> {
         this.forWhom = forWhom;
     }
 
-    public LocalDate getManufactureDate() {
+    public Timestamp getManufactureDate() {
         return manufactureDate;
     }
 
-    public void setManufactureDate(LocalDate manufactureDate) {
+    public void setManufactureDate(Timestamp manufactureDate) {
         this.manufactureDate = manufactureDate;
     }
 
@@ -88,15 +71,13 @@ public class Clothing implements Comparable<Clothing> {
 
 
     public Clothing() {
-        id = 0;
         forWhom = FOR_WHOM.MALE;
         manufacturer = new Manufacturer(null, null);
-        manufactureDate = LocalDate.now();   // current date
+        manufactureDate = new Timestamp(System.currentTimeMillis());   // current date
         price = 0;
     }
 
     private Clothing(ClothingBuilder builder) {
-        this.id = builder.id;
         this.name = builder.name;
         this.type = builder.type;
         this.forWhom = builder.for_whom;
@@ -106,16 +87,14 @@ public class Clothing implements Comparable<Clothing> {
     }
 
     public static class ClothingBuilder{
-        private int id;
         private String name;
         private String type;
         private FOR_WHOM for_whom;
         private Manufacturer manufacturer;
-        private LocalDate manufactureDate;
+        private Timestamp manufactureDate;
         private int price;
 
-        public ClothingBuilder(int id, String name, String type, FOR_WHOM for_whom) {
-            this.id = id;
+        public ClothingBuilder(String name, String type, FOR_WHOM for_whom) {
             this.name = name;
             this.type = type;
             this.for_whom = for_whom;
@@ -126,7 +105,7 @@ public class Clothing implements Comparable<Clothing> {
             return this;
         }
 
-        public ClothingBuilder setManufactureDate(LocalDate manufactureDate) {
+        public ClothingBuilder setManufactureDate(Timestamp manufactureDate) {
             this.manufactureDate = manufactureDate;
             return this;
         }
@@ -146,8 +125,7 @@ public class Clothing implements Comparable<Clothing> {
         String string = manufacturer.toString();
         String manufacturerStr = string.substring(0, string.length() - 1);
         manufacturerStr = manufacturerStr.replaceAll("\n", "\n    ");
-        return "Id: " + id + "\n"
-            + "Name: " + name + "\n"
+        return "Name: " + name + "\n"
             + "Type: " + type + "\n"
             + "For whom: " + forWhom + "\n"
             + "Manufacturer:\n    " + manufacturerStr + "\n"
@@ -171,12 +149,11 @@ public class Clothing implements Comparable<Clothing> {
 
     public Clothing(LinkedHashMap<String, Object> clothing) {
         try {
-            id = (int) clothing.get("id");
             name = (String) clothing.get("name");
             type = (String) clothing.get("type");
             forWhom = (FOR_WHOM) clothing.get("forWhom");
             manufacturer = (Manufacturer) clothing.get("manufacturer");
-            manufactureDate = (LocalDate) clothing.get("manufactureDate");
+            manufactureDate = (Timestamp) clothing.get("manufactureDate");
             price = (int) clothing.get("price");
         }
         catch (Exception e) {

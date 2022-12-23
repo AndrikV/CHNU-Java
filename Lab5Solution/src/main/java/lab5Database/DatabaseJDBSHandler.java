@@ -1,9 +1,11 @@
 package lab5Database;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import lab1ClothesShop.Clothing;
+import lab1ClothesShop.Manufacturer;
+import lab1ClothesShop.Shop;
+
+import java.sql.*;
+import java.util.List;
 
 
 /**
@@ -35,10 +37,10 @@ public class DatabaseJDBSHandler {
 
     public void clearDatabase() throws SQLException {
         final String[] deleteStatements = {
-        "DROP TABLE IF EXISTS \"Shops_Clothes\";",
-        "DROP TABLE IF EXISTS \"Shops\";",
-        "DROP TABLE IF EXISTS \"Clothes\";",
-        "DROP TABLE IF EXISTS \"Manufacturers\";"
+        "DROP TABLE IF EXISTS Shops_Clothes;",
+        "DROP TABLE IF EXISTS Shops;",
+        "DROP TABLE IF EXISTS Clothes;",
+        "DROP TABLE IF EXISTS Manufacturers;"
         };
 
         try(Statement statement = connection.createStatement()) {
@@ -49,10 +51,10 @@ public class DatabaseJDBSHandler {
 
     public void createManufacturersTable() throws SQLException {
         final String tableStatement = """
-        CREATE TABLE "Manufacturers" (
-            "id" SERIAL PRIMARY KEY,
-            "name" VARCHAR(256) NOT NULL,
-            "contactInfo" TEXT NOT NULL
+        CREATE TABLE Manufacturers (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(256) NOT NULL,
+            contactInfo TEXT NOT NULL
         );
         """;
         try(Statement statement = connection.createStatement()) {
@@ -62,9 +64,9 @@ public class DatabaseJDBSHandler {
 
     public void createShopsTable() throws SQLException {
         final String tableStatement = """
-        CREATE TABLE "Shops" (
-            "id" SERIAL PRIMARY KEY,
-            "name" VARCHAR(256) NOT NULL
+        CREATE TABLE Shops (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(256) NOT NULL
         );
         """;
         try(Statement statement = connection.createStatement()) {
@@ -74,17 +76,17 @@ public class DatabaseJDBSHandler {
 
     public void createClothesTable() throws SQLException {
         final String tableStatement = """
-        CREATE TABLE "Clothes" (
-            "id" SERIAL PRIMARY KEY,
-            "name" VARCHAR(256) NOT NULL,
-            "type" VARCHAR(256) NOT NULL,
-            "forWhom" VARCHAR(256) NOT NULL,
-            "manufacturer" INT NOT NULL
-                REFERENCES "Manufacturers" ("id")
+        CREATE TABLE Clothes (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(256) NOT NULL,
+            type VARCHAR(256) NOT NULL,
+            forWhom VARCHAR(256) NOT NULL,
+            manufacturer INT NOT NULL
+                REFERENCES Manufacturers (id)
                 ON DELETE CASCADE ON UPDATE CASCADE,
-            "manufactureDate" TIMESTAMP NOT NULL
+            manufactureDate TIMESTAMP NOT NULL
                 DEFAULT CURRENT_TIMESTAMP,
-            "price" INT NOT NULL
+            price INT NOT NULL
         );
         """;
         try(Statement statement = connection.createStatement()) {
@@ -94,12 +96,12 @@ public class DatabaseJDBSHandler {
 
     public void createShopsClothesTable() throws SQLException {
         final String tableStatement = """
-        CREATE TABLE "Shops_Clothes" (
-            "shopId" INT NOT NULL
-                REFERENCES "Shops" ("id")
+        CREATE TABLE Shops_Clothes (
+            shopId INT NOT NULL
+                REFERENCES Shops (id)
                 ON DELETE CASCADE ON UPDATE CASCADE,
-            "clothingId" INT NOT NULL
-                REFERENCES "Clothes" ("id")
+            clothingId INT NOT NULL
+                REFERENCES Clothes (id)
                 ON DELETE CASCADE ON UPDATE CASCADE
         );
         """;
@@ -108,79 +110,72 @@ public class DatabaseJDBSHandler {
         }
     }
 
-    public void insertDataToManufacturersTable() throws SQLException {
-        final String tableStatement = """
-        INSERT INTO "Manufacturers" ("name", "contactInfo") VALUES
-          	('manufacturer1', 'Some contact info'),
-          	('manufacturer2', 'Some contact info'),
-          	('manufacturer3', 'Some contact info');
-        """;
-        try(Statement statement = connection.createStatement()) {
-            statement.execute(tableStatement);
+    public void addRecordToManufacturersTable(Manufacturer manufacturer) throws SQLException {
+        final String insertionStatement = "INSERT INTO Manufacturers (name, contactInfo) VALUES (?, ?) RETURNING ID;";
+        PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement);
+        preparedStatement.setString(1, manufacturer.getName());
+        preparedStatement.setString(2, manufacturer.getContactInfo());
+        preparedStatement.execute();
+    }
+
+    public void addRecordsToManufacturersTable(List<Manufacturer> manufacturers) throws SQLException {
+        for (Manufacturer manufacturer : manufacturers) {
+            addRecordToManufacturersTable(manufacturer);
         }
     }
 
-    public void insertDataToShopsTable() throws SQLException {
-        final String tableStatement = """
-        INSERT INTO "Shops" ("name") VALUES
-            ('shopName1'),
-            ('shopName2'),
-            ('shopName3');
-        """;
-        try(Statement statement = connection.createStatement()) {
-            statement.execute(tableStatement);
+    public void addRecordToShopsTable(Shop shop) throws SQLException {
+        final String insertionStatement = "INSERT INTO Shops (name) VALUES (?);";
+        PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement);
+        preparedStatement.setString(1, shop.getName());
+        preparedStatement.execute();
+    }
+
+    public void addRecordsToShopsTable(List<Shop> shops) throws SQLException {
+        for (Shop shop : shops) {
+            addRecordToShopsTable(shop);
         }
     }
 
-    public void insertDataToClothesTable() throws SQLException {
-        final String tableStatement = """
-        INSERT INTO "Clothes" ("name", "type", "forWhom", "manufacturer", "manufactureDate", "price") VALUES
-            ('clothingName1', 'type1', 'MALE', 1, '2022-12-10', 100),
-            ('clothingName2', 'type1', 'MALE', 1, '2022-12-11', 110),
-            ('clothingName3', 'type2', 'FEMALE', 1, '2022-12-10', 200),
-            ('clothingName4', 'type2', 'FEMALE', 1, '2022-12-11', 225),
-            ('clothingName5', 'type3', 'BOY', 2, '2022-12-12', 75),
-            ('clothingName6', 'type3', 'BOY', 2, '2022-12-12', 60),
-            ('clothingName7', 'type3', 'BOY', 2, '2022-12-12', 70),
-            ('clothingName8', 'type4', 'GIRL', 3, '2022-12-13', 75),
-            ('clothingName9', 'type4', 'GIRL', 3, '2022-12-13', 60),
-            ('clothingName10', 'type5', 'GIRL', 3, '2022-12-14', 70),
-            ('clothingName11', 'type5', 'GIRL', 3, '2022-12-14', 70);
+    public void addRecordToClothesTable(Clothing clothing) throws SQLException {
+        final String insertionStatement = """
+            INSERT INTO Clothes (name, type, forWhom, manufacturer, manufactureDate, price)
+            VALUES (?, ?, ?, ?, ?, ?);
         """;
-        try(Statement statement = connection.createStatement()) {
-            statement.execute(tableStatement);
+        PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement);
+        preparedStatement.setString(1, clothing.getName());
+        preparedStatement.setString(2, clothing.getType());
+        preparedStatement.setString(3, clothing.getForWhom().toString());
+        preparedStatement.setInt(4, 1);         // TODO: ?
+        preparedStatement.setTimestamp(5, clothing.getManufactureDate());
+        preparedStatement.setInt(6, clothing.getPrice());
+        preparedStatement.execute();
+    }
+
+    public void addRecordsToClothesTable(List<Clothing> clothes) throws SQLException {
+        for (Clothing clothing : clothes) {
+            addRecordToClothesTable(clothing);
         }
     }
 
-    public void insertDataToShopsClothesTable() throws SQLException {
-        final String tableStatement = """
-        INSERT INTO "Shops_Clothes" ("shopId", "clothingId") VALUES
-          	(1, 1),
-          	(1, 2),
-          	(1, 3),
-          	(1, 4),
-          	(1, 5),
-          	(1, 6),
-          	(1, 7),
-          	(1, 8),
-          	(1, 9),
-          	(1, 10),
-          	(1, 11),
-          	(2, 2),
-          	(2, 4),
-          	(2, 5),
-          	(2, 6),
-          	(2, 8),
-          	(2, 9),
-          	(2, 11),
-          	(3, 1),
-          	(3, 3),
-          	(3, 4),
-          	(3, 5),
-          	(3, 10);
-        """;
-        try(Statement statement = connection.createStatement()) {
-            statement.execute(tableStatement);
+    public void addRecordToShopsClothesTable(Shop shop) throws SQLException {
+        int shopId = 1; // TODO: get id of shop
+        for(Clothing clothing : shop.getGoods()) {
+            final String insertionStatement = """
+                INSERT INTO Shops_Clothes (shopId, clothingId)
+                VALUES (?, ?);
+            """;
+            PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement);
+            preparedStatement.setInt(1, shopId);
+            int clothingId = 1; // TODO: get id of clothing
+            preparedStatement.setInt(2, clothingId);
+            preparedStatement.execute();
+        }
+    }
+
+    public void addRecordsToShopsClothesTable(List<Shop> shops) throws SQLException {
+        for (Shop shop : shops) {
+            addRecordToShopsClothesTable(shop);
         }
     }
 }

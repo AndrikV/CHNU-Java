@@ -35,9 +35,7 @@ public class ServiceMethods {
             if (comparingByCounts != 0) {
                 return comparingByCounts;
             }
-            else {
-                return ob1.getKey().getName().compareTo(ob2.getKey().getName());
-            }
+            return ob1.getKey().getName().compareTo(ob2.getKey().getName());
         }
     }
 
