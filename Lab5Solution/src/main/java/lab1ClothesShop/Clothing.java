@@ -14,6 +14,7 @@ public class Clothing {
 
     static private int objectsCount = 0;
 
+    protected int id;
     protected String name;
     protected String type;
     protected FOR_WHOM forWhom;
@@ -69,6 +70,13 @@ public class Clothing {
         this.price = price;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Clothing() {
         forWhom = FOR_WHOM.MALE;

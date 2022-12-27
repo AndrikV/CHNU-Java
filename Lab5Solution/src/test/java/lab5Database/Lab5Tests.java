@@ -3,6 +3,7 @@ package lab5Database;
 import lab1ClothesShop.Clothing;
 import lab1ClothesShop.Manufacturer;
 import lab1ClothesShop.Shop;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -12,12 +13,15 @@ import java.util.List;
 
 import static org.testng.Assert.assertEquals;
 
+// TODO: separated classes
 public class Lab5Tests {
-    final String databaseURL = "jdbc:postgresql://localhost:5432/JavaClothesShop";
-    final String user = "postgres";
-    final String password = "PG_GK_Miner_2022";
+    static final String databaseURL = "jdbc:postgresql://localhost:5432/JavaClothesShop";
+    static final String user = "postgres";
+    static final String password = "PG_GK_Miner_2022";
+    static protected DatabaseJDBSHandler databaseJDBSHandler;
 
-    public class Data {
+
+    public static class Data {
         final long dayInMillis = 1000 * 60 * 60 * 60;
         List<Manufacturer> manufacturers = new ArrayList<>();
         List<Clothing> clothes = new ArrayList<>();
@@ -63,8 +67,17 @@ public class Lab5Tests {
             shops.add(new Shop("Shop2", new ArrayList<>(clothes.subList(0, 3))));
             shops.add(new Shop("Shop3", new ArrayList<>(clothes.subList(0, 5))));
         }
+
+        protected int getClothesShopsRecordsCount() {
+            return shops.stream().map(shop -> shop.getGoods().size()).reduce(0, Integer::sum);
+        }
     }
     Data data = new Data();
+
+    @BeforeClass
+    static public void beforeClass() throws SQLException {
+        databaseJDBSHandler = new DatabaseJDBSHandler(databaseURL, user, password);
+    }
 
     @Test
     public void construtorWithPasswordOnly() {
@@ -113,109 +126,55 @@ public class Lab5Tests {
         softAssert.assertAll();
     }
 
-    private int getCountOfRecords(ResultSet resultSet)
-            throws AssertionError, SQLException {
-        resultSet.last();
-        return resultSet.getRow();
+    private int getRecordsCount(String tableName) throws SQLException {
+        DatabaseJDBSHandler databaseJDBSHandler = new DatabaseJDBSHandler(databaseURL, user, password);
+        try(Statement statement = databaseJDBSHandler.getConnection().createStatement()) {
+            ResultSet resultSet = statement.executeQuery("SELECT Count(*) FROM " + tableName + ";");
+            resultSet.next();
+            return resultSet.getInt(1);
+        }
     }
 
-
-//    @Test(dependsOnMethods = { "createTablesFromScratch" })
     @Test(dependsOnMethods = { "createTablesFromScratch" })
     public void addRecordsToManufacturersTableTest() {
-        DatabaseJDBSHandler databaseJDBSHandler;
         try {
-            databaseJDBSHandler = new DatabaseJDBSHandler(databaseURL, user, password);
             databaseJDBSHandler.addRecordsToManufacturersTable(data.manufacturers);
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        try(Connection connection = databaseJDBSHandler.getConnection()) {
-            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Manufacturers;");
-            int size = getCountOfRecords(resultSet);
-            assertEquals(size, data.manufacturers.size());
-        } catch (Exception e) {
+            assertEquals(getRecordsCount("Manufacturers"), data.manufacturers.size());
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
-//    @Test(dependsOnMethods = { "createTablesFromScratch" })
     @Test(dependsOnMethods = { "createTablesFromScratch" })
     public void addRecordsToShopsTableTest() {
-        DatabaseJDBSHandler databaseJDBSHandler;
         try {
-            databaseJDBSHandler = new DatabaseJDBSHandler(databaseURL, user, password);
             databaseJDBSHandler.addRecordsToShopsTable(data.shops);
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        try(Connection connection = databaseJDBSHandler.getConnection()) {
-            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Shops;");
-            int size = getCountOfRecords(resultSet);
-            assertEquals(size, data.shops.size());
-        } catch (Exception e) {
+            assertEquals(getRecordsCount("Shops"), data.shops.size());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
-//    @Test(dependsOnMethods = { "createTablesFromScratch", "addRecordsToManufacturersTableTest" })
     @Test(dependsOnMethods = { "addRecordsToManufacturersTableTest" })
     public void addRecordsToClothesTableTest() {
-        DatabaseJDBSHandler databaseJDBSHandler;
         try {
-            databaseJDBSHandler = new DatabaseJDBSHandler(databaseURL, user, password);
             databaseJDBSHandler.addRecordsToClothesTable(data.clothes);
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        try(Connection connection = databaseJDBSHandler.getConnection()) {
-            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Clothes;");
-            int size = getCountOfRecords(resultSet);
-            assertEquals(size, data.clothes.size());
-        } catch (Exception e) {
+            assertEquals(getRecordsCount("Clothes"), data.clothes.size());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
     @Test(dependsOnMethods = {"addRecordsToShopsTableTest", "addRecordsToClothesTableTest"})
-            public void addRecordsToShopsClothesTableTest() {
-        DatabaseJDBSHandler databaseJDBSHandler;
+    public void addRecordsToShopsClothesTableTest() {
         try {
-            databaseJDBSHandler = new DatabaseJDBSHandler(databaseURL, user, password);
             databaseJDBSHandler.addRecordsToShopsClothesTable(data.shops);
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        try(Connection connection = databaseJDBSHandler.getConnection()) {
-            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Shops_Clothes;");
-            int size = getCountOfRecords(resultSet);
-            int expectedSize = 0;
-            for (Shop shop : data.shops)
-                expectedSize += shop.getGoods().size();
-            assertEquals(size, expectedSize);
-        } catch (Exception e) {
+            assertEquals(getRecordsCount("Shops_Clothes"), data.getClothesShopsRecordsCount());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
             throw new RuntimeException(e);
         }
     }

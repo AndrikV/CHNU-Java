@@ -112,10 +112,12 @@ public class DatabaseJDBSHandler {
 
     public void addRecordToManufacturersTable(Manufacturer manufacturer) throws SQLException {
         final String insertionStatement = "INSERT INTO Manufacturers (name, contactInfo) VALUES (?, ?) RETURNING ID;";
-        PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement);
+        PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement,
+                Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, manufacturer.getName());
         preparedStatement.setString(2, manufacturer.getContactInfo());
-        preparedStatement.execute();
+        int generatedId = preparedStatement.executeUpdate();
+        manufacturer.setId(generatedId);
     }
 
     public void addRecordsToManufacturersTable(List<Manufacturer> manufacturers) throws SQLException {
@@ -125,10 +127,12 @@ public class DatabaseJDBSHandler {
     }
 
     public void addRecordToShopsTable(Shop shop) throws SQLException {
-        final String insertionStatement = "INSERT INTO Shops (name) VALUES (?);";
-        PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement);
+        final String insertionStatement = "INSERT INTO Shops (name) VALUES (?) RETURNING ID;";
+        PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement,
+                Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, shop.getName());
-        preparedStatement.execute();
+        int generatedId = preparedStatement.executeUpdate();
+        shop.setId(generatedId);
     }
 
     public void addRecordsToShopsTable(List<Shop> shops) throws SQLException {
@@ -140,16 +144,19 @@ public class DatabaseJDBSHandler {
     public void addRecordToClothesTable(Clothing clothing) throws SQLException {
         final String insertionStatement = """
             INSERT INTO Clothes (name, type, forWhom, manufacturer, manufactureDate, price)
-            VALUES (?, ?, ?, ?, ?, ?);
-        """;
-        PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement);
+                VALUES (?, ?, ?, ?, ?, ?)
+                RETURNING ID;
+        """;    // TODO: RETURNING ID
+        PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement,
+                Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, clothing.getName());
         preparedStatement.setString(2, clothing.getType());
         preparedStatement.setString(3, clothing.getForWhom().toString());
-        preparedStatement.setInt(4, 1);         // TODO: ?
+        preparedStatement.setInt(4, clothing.getManufacturer().getId());
         preparedStatement.setTimestamp(5, clothing.getManufactureDate());
         preparedStatement.setInt(6, clothing.getPrice());
-        preparedStatement.execute();
+        int generatedId = preparedStatement.executeUpdate();
+        clothing.setId(generatedId);
     }
 
     public void addRecordsToClothesTable(List<Clothing> clothes) throws SQLException {
@@ -159,7 +166,7 @@ public class DatabaseJDBSHandler {
     }
 
     public void addRecordToShopsClothesTable(Shop shop) throws SQLException {
-        int shopId = 1; // TODO: get id of shop
+        int shopId = shop.getId();
         for(Clothing clothing : shop.getGoods()) {
             final String insertionStatement = """
                 INSERT INTO Shops_Clothes (shopId, clothingId)
@@ -167,7 +174,7 @@ public class DatabaseJDBSHandler {
             """;
             PreparedStatement preparedStatement = connection.prepareStatement(insertionStatement);
             preparedStatement.setInt(1, shopId);
-            int clothingId = 1; // TODO: get id of clothing
+            int clothingId = clothing.getId();
             preparedStatement.setInt(2, clothingId);
             preparedStatement.execute();
         }

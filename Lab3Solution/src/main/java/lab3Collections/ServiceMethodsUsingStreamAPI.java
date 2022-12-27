@@ -35,9 +35,7 @@ public class ServiceMethodsUsingStreamAPI {
             if (comparingByCounts != 0) {
                 return comparingByCounts;
             }
-            else {
-                return ob1.getKey().getName().compareTo(ob2.getKey().getName());
-            }
+            return ob1.getKey().getName().compareTo(ob2.getKey().getName());
         }
     }
 
@@ -67,7 +65,6 @@ public class ServiceMethodsUsingStreamAPI {
         return resultList;
     }
 
-    // TODO: remove
     public static class ShopClothesCountComparator implements Comparator<AbstractMap.SimpleEntry<String, Integer>> {
         @Override
         public int compare(AbstractMap.SimpleEntry<String, Integer> ob1, AbstractMap.SimpleEntry<String, Integer> ob2) {
@@ -75,9 +72,7 @@ public class ServiceMethodsUsingStreamAPI {
             if (comparingByCounts != 0) {
                 return comparingByCounts;
             }
-            else {
-                return ob1.getKey().compareTo(ob2.getKey());
-            }
+            return ob1.getKey().compareTo(ob2.getKey());
         }
     }
 

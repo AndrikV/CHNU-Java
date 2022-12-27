@@ -8,13 +8,11 @@ import java.util.List;
  * Class that described clothes shop
  */
 public class Shop {
+    private int id;
     private String name;
     private List<Clothing> goods;
 
-    public Shop() {
-        name = null;
-        goods = null;
-    }
+    public Shop() {}
 
     public Shop(String name) {
         this.name = name;
@@ -56,5 +54,13 @@ public class Shop {
         if (obj instanceof Shop)
             return name.equals( ((Shop) obj).name );
         return false;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

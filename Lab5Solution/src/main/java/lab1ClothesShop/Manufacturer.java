@@ -4,13 +4,11 @@ package lab1ClothesShop;
  * Class that described clothes manufacturer
  */
 public class Manufacturer {
+    private Integer id;
     private String name;
     private String contactInfo;
 
-    public Manufacturer() {
-        name = null;
-        contactInfo = null;
-    }
+    public Manufacturer() {}
 
     public Manufacturer(String name, String contactInfo) {
         this.name = name;
@@ -47,5 +45,13 @@ public class Manufacturer {
     @Override
     public boolean equals(Object obj) {
         return name.equals(((Manufacturer) obj).name);
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
